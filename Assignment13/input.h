@@ -49,6 +49,46 @@ string inputString(string prompt, bool spaces)
 	return input;
 }
 
+// Precondition: list of characters
+// Postcondition: return the character from the list if the input is not matched
+char inputChar(string prompt, string listChars)
+{
+	char input;
+	while (true)
+	{
+		cout << prompt;
+		if (!(cin >> input))
+			cout << "ERROR-1: Invalid input. Must be a character type.\n";
+		else
+		{
+			bool bfound = false;
+			for (unsigned c = 0; c < listChars.length(); c++)
+				if (toupper(listChars[c]) == toupper(input))
+				{
+					bfound = true;
+					break;
+				}
+			if (!bfound)
+			{
+				cout << "ERROR-2: Invalid input. Must be a character from the list of '";
+				for (unsigned c = 0; c < listChars.length() - 1; c++)
+					cout << "'" << static_cast<char>(toupper(listChars[c])) << "', ";
+				cout << "or '" << static_cast<char>(toupper(listChars.back())) << "'.\n";
+			}
+			else
+				break;
+		}
+		cin.clear();
+		cin.ignore(999, '\n');
+
+	}
+
+	cin.clear();
+	cin.ignore(999, '\n');
+
+	return input;
+}
+
 //PreCondition: valid yes (char) or no (char)
 //PostCondition: returns an uppercase  yes (char) or no (char) 
 char inputChar(string prompt, char yes, char no)
