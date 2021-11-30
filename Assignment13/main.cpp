@@ -48,43 +48,52 @@ int main(void)
 //PostCondition: 
 void programOne(void)
 {
-    do
-    {
-        clearScreen();
+	vector<double> vector;
+	do
+	{
+		clearScreen();
+		cout << "\n\t\t  1> Sort simulations";
+		cout << "\n\t\t" << string(70, char(205));
+		cout << "\n\t\t\tA> Create a dynamic array and fill with random elements";
+		cout << "\n\t\t\tB> Display the unsorted array";
+		cout << "\n\t\t\tC> Perform BubbleSort";
+		cout << "\n\t\t\tD> Perform SelectionSort";
+		cout << "\n\t\t\tE> Perform InsertionSort";
+		cout << "\n\t\t\tF> Perform QuickSort";
+		cout << "\n\t\t\tG> Perform MergeSort";
+		cout << "\n\t\t\tH> Perform HeapSort";
+		cout << "\n\t\t" << string(70, char(196));
+		cout << "\n\t\t\t0> return";
+		cout << "\n\t\t" << string(70, char(205)) << '\n';
+		char option = inputChar("\t\t\tOption: ", static_cast<string>("0ABCDEFGH"));
 
-        cout << "\n\t1> Sort simulations" << endl;
-        cout << "\t" + string(100, char(205)) << endl;
-        cout << "\t\tA> Create a dynamic array and fill with random elements" << endl;
-        cout << "\t\tB> Display the unsorted array" << endl;
-        cout << "\t\tC> Perform BubbleSort" << endl;
-        cout << "\t\tD> Perform SelectionSort" << endl;
-        cout << "\t\tE> Perform InsertionSort" << endl;
-        cout << "\t\tF> Perform QuickSort" << endl;
-        cout << "\t\tG> Perform MergeSort" << endl;
-        cout << "\t\tH> Perform HeapSort" << endl;
-        cout << "\t" + string(100, char(196)) << endl;
-        cout << "\t\t0> return" << endl;
-        cout << "\t" + string(100, char(205)) << endl;
+		switch (toupper(option))
+		{
+		case '0':
+			return 0;
+		case 'A': createArray(vector);
+			break;
+		case 'B': displayArray(vector, false);
+			break;
+		case 'C': performBubbleSort(vector);
+			break;
+		case 'D': performSelectionSort(vector);
+			break;
+		case 'E': performInsertionSort(vector);
+			break;
+		case 'F': performQuickSort(vector);
+			break;
+		case 'G': performMergeSort(vector);
+			break;
+		case 'H': performHeapSort(vector);
+			break;
+		}
 
-        int option = inputChar("\t\tOption: ");
+		cout << '\n';
+		system("pause");
 
-
-        switch (option)
-        {
-        case '0': return;
-        case 'A': /*funciton here*/ break;
-        case 'B': /*funciton here*/ break;
-        case 'C': /*funciton here*/ break;
-        case 'D': /*funciton here*/ break;
-        case 'E': /*funciton here*/ break;
-        case 'F': /*funciton here*/ break;
-        case 'G': /*funciton here*/ break;
-        case 'H': /*funciton here*/ break;
-        default: cout << "\t\tERROR-1A: Invalid input. Must be '0','A','B','C','D','E','F','G', or 'H'" << endl;
-        }
-        cout << endl;
-        pause("\n\t\tPress enter to continue...");
-    } while (true);
+	} while (true);
+	return 0;
 }
 
 
