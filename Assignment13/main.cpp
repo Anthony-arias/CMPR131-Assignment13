@@ -70,7 +70,7 @@ void programOne(void)
 		switch (toupper(option))
 		{
 		case '0':
-			return 0;
+			return;
 		case 'A': createArray(vector);
 			break;
 		case 'B': displayArray(vector, false);
@@ -93,7 +93,6 @@ void programOne(void)
 		system("pause");
 
 	} while (true);
-	return 0;
 }
 
 
