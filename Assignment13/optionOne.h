@@ -9,20 +9,22 @@
 
 using namespace std;
 
-void createArray(vector<double>& temp);
+void createArray(vector<double>& temp1, vector<double>& temp2);
 void displayArray(vector<double>& temp, bool isSorted);
 
 void performBubbleSort(vector<double>& temp);
-void bubbleSort_Ascending(vector<double>& temp);
-void bubbleSort_Descending(vector<double>& temp);
+void bubbleSort_Ascending(vector<double>& temp, int arraySize, int& count);
+void bubbleSort_Descending(vector<double>& temp, int arraySize, int& count);
 
 void performSelectionSort(vector<double>& temp);
-void selectionSort_Ascending(vector<double>& temp);
-void selectionSort_Descending(vector<double>& temp);
+int minIndex(vector<double> temp, int i, int j, int& count);
+int maxIndex(vector<double> temp, int i, int j, int& count);
+void selectionSort_Ascending(vector<double>& temp, int arraySize, int index, int& count);
+void selectionSort_Descending(vector<double>& temp, int arraySize, int index, int& count);
 
 void performInsertionSort(vector<double>& temp);
-void insertionSort_Ascending(vector<double>& temp);
-void insertionSort_Descending(vector<double>& temp);
+void insertionSort_Ascending(vector<double>& temp, int arraySize, int& count);
+void insertionSort_Descending(vector<double>& temp, int arraySize, int& count);
 
 void performQuickSort(vector<double>& temp);
 void quickSort_Ascending(vector<double>& temp, int low, int high, int& count);
@@ -44,17 +46,19 @@ void heapifyDescending(vector<double>& temp, int n, int i, int& count);
 
 // Precondition: None
 // Postcondition: Asks user to input the size and initializes the vector with size amount of random double
-void createArray(vector<double>& temp)
+void createArray(vector<double>& temp1, vector<double>& temp2)
 {
 	int elements = inputInteger("\n\t\tEnter the size of the dynamic array: ", true);
 	srand(time(0));
 	double randomNumber = 0.0;
-	temp.clear();
+	temp1.clear();
+	temp2.clear();
 
 	for (int i = 0; i < elements; i++)
 	{
 		randomNumber = 1.0 + (double)(rand()) / ((double)(RAND_MAX / ((elements * 2.0) - 1.0)));
-		temp.push_back(randomNumber);
+		temp1.push_back(randomNumber);
+		temp2.push_back(randomNumber);
 	}
 
 	cout << "\n\t\tDynamic array's size of " << elements << " has been created with random elements.\n";
@@ -64,52 +68,59 @@ void createArray(vector<double>& temp)
 // Postcondition: Displays all vector's elements
 void displayArray(vector<double>& temp, bool isSorted)
 {
-	if (isSorted)
+	if (temp.empty())
 	{
-		int index = 0;
-		cout << "\n\t\t";
-
-		for (int i = 0; i < temp.size(); i++)
-		{
-			index++;
-			cout << fixed << setprecision(1) << temp.at(i);
-			if (index == 14)
-			{
-				cout << "\n\t\t";
-				index = 0;
-			}
-			else if (i == temp.size() - 1)
-				break;
-			else
-				cout << ", ";
-		}
-		cout << "\n";
+		cout << "\n\t\tThe dynamic array is empty\n";
 	}
 	else
 	{
-		int index = 0;
-
-		cout << "\n\t\tUnsorted dynamic array:\n";
-		cout << "\n\t\t";
-
-		for (int i = 0; i < temp.size(); i++)
+		if (isSorted)
 		{
+			int index = 0;
+			cout << "\n\t\t";
 
-			index++;
-
-			cout << fixed << setprecision(1) << temp.at(i);
-
-			if (index == 14)
+			for (int i = 0; i < temp.size(); i++)
 			{
-				cout << "\n\t\t";
-				index = 0;
+				index++;
+				cout << fixed << setprecision(1) << temp.at(i);
+				if (index == 14)
+				{
+					cout << "\n\t\t";
+					index = 0;
+				}
+				else if (i == temp.size() - 1)
+					break;
+				else
+					cout << ", ";
 			}
-			else if (i == temp.size() - 1)
-				break;
-			else
-				cout << ", ";
+			cout << "\n";
 		}
-		cout << "\n";
+		else
+		{
+			int index = 0;
+
+			cout << "\n\t\tUnsorted dynamic array:\n";
+			cout << "\n\t\t";
+
+			for (int i = 0; i < temp.size(); i++)
+			{
+
+				index++;
+
+				cout << fixed << setprecision(1) << temp.at(i);
+
+				if (index == 14)
+				{
+					cout << "\n\t\t";
+					index = 0;
+				}
+				else if (i == temp.size() - 1)
+					break;
+				else
+					cout << ", ";
+			}
+			cout << "\n";
+		}
 	}
 
 }
@@ -124,15 +135,16 @@ void performBubbleSort(vector<double>& temp)
 	}
 	else
 	{
+		int count = 0;
 		cout << "\n\t\tBubbleSort:";
 
 		char sorting = inputChar("\n\n\t\tChoose sort in (A)scending or (D)escending order: ", "AD");
 
 		switch (toupper(sorting))
 		{
-		case 'A': bubbleSort_Ascending(temp);
+		case 'A': bubbleSort_Ascending(temp, temp.size(), count);
 			break;
-		case 'D': bubbleSort_Descending(temp);
+		case 'D': bubbleSort_Descending(temp, temp.size(), count);
 			break;
 		}
 	}
@@ -141,49 +153,52 @@ void performBubbleSort(vector<double>& temp)
 
 // Precondition: Array is not empty
 // Postcondition: Bubble sorts the dynamic array in ascending order
-void bubbleSort_Ascending(vector<double>& temp)
+void bubbleSort_Ascending(vector<double>& temp, int arraySize, int& count)
 {
-	int count = 0;
-
+	if (arraySize == 1)
+	{
+		cout << "\n\t\tAscending:\n";
+		displayArray(temp, true);
+		cout << "\n\t\tNumber of swapping routines = " << count;
+		return;
+	}
+		
 	for (int i = 0; i < temp.size() - 1; i++)
 	{
-		for (int j = 0; j < temp.size() - i - 1; j++)
+		if (temp[i] > temp[i + 1])
 		{
-			if (temp[j] > temp[j + 1])
-			{
-				swap(temp[j], temp[j + 1]);
-				count++;
-			}
+			swap(temp[i], temp[i + 1]);
 			count++;
 		}
+		count++;
 	}
-	cout << "\n\t\tAscending:\n";
-	displayArray(temp, true);
-	cout << "\n\t\tNumber of swapping routines = " << count;
 
+	bubbleSort_Ascending(temp, arraySize - 1, count);
 }
 
 // Precondition: Array is not empty
 // Postcondition: Bubble sorts the dynamic array in descending order
-void bubbleSort_Descending(vector<double>& temp)
+void bubbleSort_Descending(vector<double>& temp, int arraySize, int& count)
 {
-	int count = 0;
+	if (arraySize == 1)
+	{
+		cout << "\n\t\tDescending:\n";
+		displayArray(temp, true);
+		cout << "\n\t\tNumber of swapping routines = " << count;
+		return;
+	}
 
 	for (int i = 0; i < temp.size() - 1; i++)
 	{
-		for (int j = 0; j < temp.size() - i - 1; j++)
+		if (temp[i] < temp[i + 1])
 		{
-			if (temp[j] < temp[j + 1])
-			{
-				swap(temp[j], temp[j + 1]);
-				count++;
-			}
+			swap(temp[i], temp[i + 1]);
 			count++;
 		}
+		count++;
 	}
-	cout << "\n\t\tDescending:\n";
-	displayArray(temp, true);
-	cout << "\n\t\tNumber of swapping routines = " << count;
+
+	bubbleSort_Descending(temp, arraySize - 1, count);
 }
 
 // Precondition: Array is not empty
@@ -196,71 +211,122 @@ void performSelectionSort(vector<double>& temp)
 	}
 	else
 	{
+		int count = 0;
 		cout << "\n\t\tSelectionSort:";
 		char sorting = inputChar("\n\n\t\tChoose sort in (A)scending or (D)escending order: ", "AD");
 
 		switch (toupper(sorting))
 		{
-		case 'A': selectionSort_Ascending(temp);
+		case 'A': selectionSort_Ascending(temp, temp.size(), 0, count);
 			break;
-		case 'D': selectionSort_Descending(temp);
+		case 'D': selectionSort_Descending(temp, temp.size(), 0, count);
 			break;
 		}
 	}
 
+}
+
+// Precondition: NA
+// Postcondition: Return minimum index
+int minIndex(vector<double> temp, int i, int j, int& count)
+{
+	if (i == j)
+		return i;
+
+	count++;
+	// Find minimum of remaining elements
+	int k = minIndex(temp, i + 1, j, count);
+
+	// Return minimum of current and remaining.
+	if (temp[i] < temp[k])
+		return i;
+	else
+		return k;
+}
+
+// Precondition: NA
+// Postcondition: Return maximum index
+int maxIndex(vector<double> temp, int i, int j, int& count)
+{
+	if (i == j)
+		return i;
+
+	count++;
+	// Find minimum of remaining elements
+	int k = maxIndex(temp, i + 1, j, count);
+
+	// Return minimum of current and remaining.
+	if (temp[i] > temp[k])
+		return i;
+	else
+		return k;
 }
 
 // Precondition: Array is not empty
 // Postcondition: Selection sorts the dynamic array in ascending order
-void selectionSort_Ascending(vector<double>& temp)
+void selectionSort_Ascending(vector<double>& temp, int arraySize, int index, int& count)
 {
-	int count = 0;
-
-	for (int k = 0; k < temp.size() - 1; k++)
+	if (index == arraySize)
 	{
-		int min_index = k;
-		for (int i = k + 1; i < temp.size(); i++)
-		{
-			if (temp[i] < temp[min_index])
-			{
-				min_index = i;
-				count++;
-			}
-		}
-		count++;
-		swap(temp[k], temp[min_index]);
+		cout << "\n\t\tAscending:\n";
+		displayArray(temp, true);
+		cout << "\n\t\tNumber of swapping routines = " << count;
+		return;
 	}
 
-	cout << "\n\t\tAscending:\n";
-	displayArray(temp, true);
-	cout << "\n\t\tNumber of swapping routines = " << count;
-	
+	int k = minIndex(temp, index, arraySize - 1, count);
+
+	if (k != index)
+	{
+		swap(temp[k], temp[index]);
+		count++;
+	}
+
+	selectionSort_Ascending(temp, arraySize, index + 1, count);
+}
+
+void recursiveSSort_Ascending(vector<double>& temp, int arraySize, int index, int& count)
+{
+	if (index == arraySize)
+	{
+		cout << "\n\t\tAscending:\n";
+		displayArray(temp, true);
+		cout << "\n\t\tNumber of swapping routines = " << count;
+		return;
+	}
+
+	int k = minIndex(temp, index, arraySize - 1, count);
+
+	if (k != index)
+	{
+		swap(temp[k], temp[index]);
+		count++;
+	}
+		
+	recursiveSSort_Ascending(temp, arraySize, index + 1, count);
 }
 
 // Precondition: Array is not empty
 // Postcondition: Selection sorts the dynamic array in descending order
-void selectionSort_Descending(vector<double>& temp)
+void selectionSort_Descending(vector<double>& temp, int arraySize, int index, int& count)
 {
-	int count = 0;
-
-	for (int k = 0; k < temp.size() - 1; k++)
+	if (index == arraySize)
 	{
-		int min_index = k;
-		for (int i = k + 1; i < temp.size(); i++)
-		{
-			if (temp[i] > temp[min_index])
-			{
-				min_index = i;
-				count++;
-			}
-		}
-		count++;
-		swap(temp[k], temp[min_index]);
+		cout << "\n\t\tDescending:\n";
+		displayArray(temp, true);
+		cout << "\n\t\tNumber of swapping routines = " << count;
+		return;
 	}
 
-	cout << "\n\t\tDescending:\n";
-	displayArray(temp, true);
-	cout << "\n\t\tNumber of swapping routines = " << count;
+	int k = maxIndex(temp, index, arraySize - 1, count);
+
+	if (k != index)
+	{
+		swap(temp[k], temp[index]);
+		count++;
+	}
+
+	selectionSort_Descending(temp, arraySize, index + 1, count);
 }
 
 // Precondition: Array is not empty
@@ -273,14 +339,23 @@ void performInsertionSort(vector<double>& temp)
 	}
 	else
 	{
+		int count = 0;
 		cout << "\n\t\tInsertionSort:";
 		char sorting = inputChar("\n\n\t\tChoose sort in (A)scending or (D)escending order: ", "AD");
 
 		switch (toupper(sorting))
 		{
-		case 'A': insertionSort_Ascending(temp);
+		case 'A': 
+			insertionSort_Ascending(temp, temp.size(), count);
+			cout << "\n\t\tAscending:\n";
+			displayArray(temp, true);
+			cout << "\n\t\tNumber of swapping routines = " << count;
 			break;
-		case 'D': insertionSort_Descending(temp);
+		case 'D': 
+			insertionSort_Descending(temp, temp.size(), count);
+			cout << "\n\t\tDescending:\n";
+			displayArray(temp, true);
+			cout << "\n\t\tNumber of swapping routines = " << count;
 			break;
 		}
 	}
@@ -289,55 +364,48 @@ void performInsertionSort(vector<double>& temp)
 
 // Precondition: Array is not empty
 // Postcondition: Insertion sorts the dynamic array in ascending order
-void insertionSort_Ascending(vector<double>& temp)
+void insertionSort_Ascending(vector<double>& temp, int arraySize, int& count)
 {
-	int count = 0;
-	int key, index;
-
-	for (int i = 1; i < temp.size(); i++)
+	if (arraySize <= 1)
 	{
-		key = temp[i];
-		index = i - 1;
+		return;
+	}
 
-		while (index >= 0 && temp[index] > key)
-		{
-			temp[index + 1] = temp[index];
-			index--;
-			count++;
-		}
-		temp[index + 1] = key;
+	insertionSort_Ascending(temp, arraySize - 1, ++count);
+	int key = temp[arraySize - 1];
+	int index = arraySize - 2;
+
+	while (index >= 0 && temp[index] > key)
+	{
+		temp[index + 1] = temp[index];
+		index--;
 		count++;
 	}
-	cout << "\n\t\tAscending:\n";
-	displayArray(temp, true);
-	cout << "\n\t\tNumber of swapping routines = " << count;
+	temp[index + 1] = key;
 }
 
 // Precondition: Array is not empty
 // Postcondition: Insertion sorts the dynamic array in descending order
-void insertionSort_Descending(vector<double>& temp)
+void insertionSort_Descending(vector<double>& temp, int arraySize, int& count)
 {
-	int count = 0;
-	int key, index;
 
-	for (int i = 1; i < temp.size(); i++)
+	if (arraySize <= 1)
 	{
-		key = temp[i];
-		index = i - 1;
+		return;
+	}
 
-		while (index >= 0 && temp[index] < key)
-		{
-			temp[index + 1] = temp[index];
-			index--;
-			count++;
-		}
+	insertionSort_Descending(temp, arraySize - 1, ++count);
+	int key = temp[arraySize - 1];
+	int index = arraySize - 2;
 
-		temp[index + 1] = key;
+	while (index >= 0 && temp[index] < key)
+	{
+		temp[index + 1] = temp[index];
+		index--;
 		count++;
 	}
-	cout << "\n\t\tDescending:\n";
-	displayArray(temp, true);
-	cout << "\n\t\tNumber of swapping routines = " << count;
+	temp[index + 1] = key;
+
 }
 
 // Precondition: Array is not empty
@@ -711,7 +779,3 @@ void heapifyDescending(vector<double>& temp, int n, int i, int& count)
 		heapifyDescending(temp, n, smallest, count);
 	}
 }
-
-
-
-
