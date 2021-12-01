@@ -6,9 +6,11 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 #include "input.h"
 #include "optionOne.h"
 #include "optionTwo.h"
+#include "Student.h"
 
 void programOne(void);
 void programTwo(void);
@@ -100,6 +102,7 @@ void programOne(void)
 //PostCondition: 
 void programTwo(void)
 {
+    vector<Student> studentList;
     do
     {
         clearScreen();
@@ -122,12 +125,12 @@ void programTwo(void)
         switch (option)
         {
         case '0': return;
-        case 'A': /*funciton here*/ break;
-        case 'B': /*funciton here*/ break;
-        case 'C': /*funciton here*/ break;
-        case 'D': /*funciton here*/ break;
-        case 'E': /*funciton here*/ break;
-        case 'F': /*funciton here*/ break;
+        case 'A': readFromFile(studentList); break;
+        case 'B': displayRecords(studentList); break;
+        case 'C': insertRecord(studentList); break;
+        case 'D': removeRecord(studentList); break;
+        case 'E': sortRecords(studentList); break;
+        case 'F': writeToFile(studentList); break;
         default: cout << "\t\tERROR-1A: Invalid input. Must be '0','A','B','C','D','E', or 'F'" << endl;
         }
         cout << endl;
