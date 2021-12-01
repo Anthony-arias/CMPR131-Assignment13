@@ -72,7 +72,7 @@ void programOne(void)
 		switch (toupper(option))
 		{
 		case '0':
-			return 0;
+			return;
 		case 'A': 
 			createArray(vector, vector_copy);	
 			break;
