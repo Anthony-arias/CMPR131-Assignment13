@@ -50,7 +50,7 @@ int main(void)
 //PostCondition: 
 void programOne(void)
 {
-	vector<double> vector;
+	vector<double> vector, vector_copy;
 	do
 	{
 		clearScreen();
@@ -72,10 +72,12 @@ void programOne(void)
 		switch (toupper(option))
 		{
 		case '0':
-			return;
-		case 'A': createArray(vector);
+			return 0;
+		case 'A': 
+			createArray(vector, vector_copy);	
 			break;
-		case 'B': displayArray(vector, false);
+		case 'B': 
+			displayArray(vector_copy, false);
 			break;
 		case 'C': performBubbleSort(vector);
 			break;
