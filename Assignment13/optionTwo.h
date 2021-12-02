@@ -18,6 +18,8 @@ void NameInsertionSort(vector<Student>& studentList, bool ascending );
 void MajorInsertionSort(vector<Student>& studentList, bool ascending );
 void GpaInsertionSort(vector<Student>& studentList, bool ascending );
 
+//PreCondition: input Student vector
+//PostCondition: reads student records from file and inserts records in to vector
 void readFromFile(vector<Student>& studentList)
 {
     ifstream source;
@@ -51,8 +53,16 @@ void readFromFile(vector<Student>& studentList)
     cout << "\n\t\tData have been read from students.dat.";
 }
 
+//PreCondition: input Student vector
+//PostCondition: writes student records in to .dat file
 void writeToFile(vector<Student> studentList)
 {
+    if (studentList.empty())
+    {
+        cout << "\n\t\tERROR: No student records found";
+        return;
+    }
+
     ofstream myfile("Students.dat");
     if (myfile.is_open())
     {
@@ -67,6 +77,8 @@ void writeToFile(vector<Student> studentList)
     else cout << "Unable to open file";
 }
 
+//PreCondition: input Student vector
+//PostCondition: display student records from vector
 void displayRecords(vector<Student> studentList)
 {
     if (studentList.empty())
@@ -87,6 +99,8 @@ void displayRecords(vector<Student> studentList)
 
 }
 
+//PreCondition: input Student vector
+//PostCondition: insert student record in to vector
 void insertRecord(vector<Student>& studentList)
 {
     int _id = inputInteger("\n\t\tEnter a new student ID: ", true);
@@ -107,6 +121,8 @@ void insertRecord(vector<Student>& studentList)
     studentList.push_back(newStudent);
 }
 
+//PreCondition: input Student vector
+//PostCondition: removes student record from vector
 void removeRecord(vector<Student>& studentList)
 {
     if (studentList.empty())
@@ -138,6 +154,8 @@ void removeRecord(vector<Student>& studentList)
     }
 }
 
+//PreCondition: input Student vector
+//PostCondition: allow user to select type of sort
 void sortRecords(vector<Student>& studentList)
 {
     if (studentList.empty())
@@ -189,6 +207,8 @@ void sortRecords(vector<Student>& studentList)
     
 }
 
+//PreCondition: input Student vector
+//PostCondition: Insertion sorts student records based on student id
 void IdInsertionSort(vector<Student>& studentList, bool ascending )
 {
     vector<Student> temp = studentList;
@@ -231,6 +251,8 @@ void IdInsertionSort(vector<Student>& studentList, bool ascending )
     cout << "\n\t\tNumber of swapping routines = " << count;
 }
 
+//PreCondition: input Student vector
+//PostCondition: Insertion sorts student records based on student name
 void NameInsertionSort(vector<Student>& studentList, bool ascending )
 {
     vector<Student> temp = studentList;
@@ -273,6 +295,8 @@ void NameInsertionSort(vector<Student>& studentList, bool ascending )
     cout << "\n\t\tNumber of swapping routines = " << count;
 }
 
+//PreCondition: input Student vector
+//PostCondition: Insertion sorts student records based on student major
 void MajorInsertionSort(vector<Student>& studentList, bool ascending )
 {
     vector<Student> temp = studentList;
@@ -315,6 +339,8 @@ void MajorInsertionSort(vector<Student>& studentList, bool ascending )
     cout << "\n\t\tNumber of swapping routines = " << count;
 }
 
+//PreCondition: input Student vector
+//PostCondition: Insertion sorts student records based on student gpa
 void GpaInsertionSort(vector<Student>& studentList, bool ascending )
 {
     vector<Student> temp = studentList;

@@ -2,7 +2,7 @@
 
 // Team: Anthony, An, Van, Vincent, Nhan
 // Chapter 12: 
-// 10/7/2021
+// 12/2/2021
 
 #include <iostream>
 #include <string>
@@ -47,7 +47,7 @@ int main(void)
 }
 
 //PreCondition: NA
-//PostCondition: 
+//PostCondition: runs program one
 void programOne(void)
 {
 	vector<double> vector, vector_copy;
@@ -101,7 +101,7 @@ void programOne(void)
 
 
 //PreCondition: NA
-//PostCondition: 
+//PostCondition: runs program two
 void programTwo(void)
 {
     vector<Student> studentList;
@@ -139,4 +139,3 @@ void programTwo(void)
         pause("\n\t\tPress enter to continue...");
     } while (true);
 }
-
