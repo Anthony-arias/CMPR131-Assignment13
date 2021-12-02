@@ -50,7 +50,7 @@ int main(void)
 //PostCondition: runs program one
 void programOne(void)
 {
-	vector<double> vector, vector_copy;
+	vector<double> vector;
 	do
 	{
 		clearScreen();
@@ -71,30 +71,19 @@ void programOne(void)
 
 		switch (toupper(option))
 		{
-		case '0':
-			return;
-		case 'A': 
-			createArray(vector, vector_copy);	
-			break;
-		case 'B': 
-			displayArray(vector_copy, false);
-			break;
-		case 'C': performBubbleSort(vector);
-			break;
-		case 'D': performSelectionSort(vector);
-			break;
-		case 'E': performInsertionSort(vector);
-			break;
-		case 'F': performQuickSort(vector);
-			break;
-		case 'G': performMergeSort(vector);
-			break;
-		case 'H': performHeapSort(vector);
-			break;
+		case '0': return;
+		case 'A': createArray(vector); break;
+		case 'B': unsortedArray(vector); break;
+		case 'C': performBubbleSort(vector); break;
+		case 'D': performSelectionSort(vector);	break;
+		case 'E': performInsertionSort(vector);	break;
+		case 'F': performQuickSort(vector);	break;
+		case 'G': performMergeSort(vector);	break;
+		case 'H': performHeapSort(vector); break;
 		}
 
-		cout << '\n';
-		system("pause");
+        cout << endl;
+        pause("\n\t\tPress enter to continue...");
 
 	} while (true);
 }
