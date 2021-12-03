@@ -28,9 +28,6 @@ void createArray(vector<double>& vector)
 	cout << "\n\t\tDynamic array's size of " << elements << " has been created with random elements." << endl;
 }
 
-
-
-
 // Precondition: vector is not empty
 // Postcondition: Displays all vector's elements
 void displayArray(vector<double> vector)
@@ -39,7 +36,6 @@ void displayArray(vector<double> vector)
 		cout << "\n\t\tThe dynamic array is empty." << endl;
 	else
 	{
-
 		int size = vector.size() - 1;
 		cout << "\n\t\t";
 		for (int i = 0; i < size; i++)
@@ -360,7 +356,6 @@ void quickSort_Ascending(vector<double>& vector, int low, int high, int& count)
 	}
 }
 
-
 // Precondition: Array is not empty
 // Postcondition: Quick sorts the dynamic array in descending order
 void quickSort_Descending(vector<double>& vector, int low, int high, int& count)
@@ -404,7 +399,6 @@ void performQuickSort(vector<double> vector)
 	
 }
 
-
 // Precondition: sub_array_2[left..mid] and sub_array_2[mid+1..right] are sorted in ascending order
 // Postcondition: Merges the two sorted sub-arrays into one
 void mergeAscending(vector<double>& sub_array_1, int left, int mid, int right, int& count)
@@ -446,7 +440,6 @@ void mergeAscending(vector<double>& sub_array_1, int left, int mid, int right, i
 	}
 }
 
-
 // Precondition: sub_array_2[left..mid] and sub_array_2[mid+1..right] are sorted in descending order
 // Postcondition: Merges the two sorted sub-arrays into one
 void mergeDescending(vector<double>& sub_array_1, int left, int mid, int right, int& count)
@@ -487,7 +480,6 @@ void mergeDescending(vector<double>& sub_array_1, int left, int mid, int right, 
 		count++;
 	}
 }
-
 
 // Precondition: Array is not empty
 // Postcondition: Merge sorts the dynamic array in ascending order
@@ -573,7 +565,6 @@ void heapifyDescending(vector<double>& vector, int n, int i, int& count)
 	}
 }
 
-
 // Precondition: n is the size of the heap, i is an index in temp
 // Postcondition: Swapping node i to the correct location, with largest be the parent root
 void heapifyAscending(vector<double>& vector, int n, int i, int& count)
@@ -631,8 +622,6 @@ void heapSort_Descending(vector<double>& vector, int& count)
 	}
 }
 
-
-
 // Precondition: Array is not empty
 // Postcondition: Asks user to either choose to heap sort the array in ascending or descending order
 void performHeapSort(vector<double> vector)
@@ -660,7 +649,6 @@ void performHeapSort(vector<double> vector)
 			displayArray(vector);
 			cout << "\n\t\tNumber of swapping routines = " << count << endl;
 		}
-	}
-	
+	}	
 }
 
