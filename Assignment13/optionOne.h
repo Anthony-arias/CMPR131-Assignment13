@@ -9,7 +9,6 @@
 
 using namespace std;
 
-
 // Precondition: None
 // Postcondition: Asks user to input the size and initializes the vector with size amount of random double
 void createArray(vector<double>& vector)
@@ -27,9 +26,6 @@ void createArray(vector<double>& vector)
 
 	cout << "\n\t\tDynamic array's size of " << elements << " has been created with random elements." << endl;
 }
-
-
-
 
 // Precondition: vector is not empty
 // Postcondition: Displays all vector's elements
@@ -181,7 +177,6 @@ void selectionSort_Ascending(vector<double>& vector, int arraySize, int index, i
 	selectionSort_Ascending(vector, arraySize, index + 1, count);
 }
 
-
 // Precondition: Array is not empty
 // Postcondition: Selection sorts the dynamic array in descending order
 void selectionSort_Descending(vector<double>& vector, int arraySize, int index, int& count)
@@ -199,7 +194,6 @@ void selectionSort_Descending(vector<double>& vector, int arraySize, int index, 
 
 	selectionSort_Descending(vector, arraySize, index + 1, count);
 }
-
 
 // Precondition: Array is not empty
 // Postcondition: Asks user to either choose to selection sort the array in ascending or descending order
@@ -272,6 +266,7 @@ void insertionSort_Descending(vector<double>& vector, int arraySize, int& count)
 	vector[index + 1] = key;
 
 }
+
 // Precondition: Array is not empty
 // Postcondition: Asks user to either choose to insertion sort the array in ascending or descending order
 void performInsertionSort(vector<double> vector)
@@ -323,7 +318,6 @@ int partitionAscending(vector<double>& vector, int low, int high, int& count)
 	return (index + 1);
 }
 
-
 // Precondition: low and high are within the range of the array
 // Postcondition: Splits the array into a smaller partition, takes last element as pivot, places the pivot element at
 //	its correct position in sorted array, and places all greater to left of pivot and all smaller elements to right of pivot
@@ -347,7 +341,6 @@ int partitionDescending(vector<double>& vector, int low, int high, int& count)
 	return (index + 1);
 }
 
-
 // Precondition: Array is not empty
 // Postcondition: Quick sorts the dynamic array in ascending order
 void quickSort_Ascending(vector<double>& vector, int low, int high, int& count)
@@ -360,7 +353,6 @@ void quickSort_Ascending(vector<double>& vector, int low, int high, int& count)
 		quickSort_Ascending(vector, index + 1, high, count);
 	}
 }
-
 
 // Precondition: Array is not empty
 // Postcondition: Quick sorts the dynamic array in descending order
@@ -404,7 +396,6 @@ void performQuickSort(vector<double> vector)
 	
 }
 
-
 // Precondition: sub_array_2[left..mid] and sub_array_2[mid+1..right] are sorted in ascending order
 // Postcondition: Merges the two sorted sub-arrays into one
 void mergeAscending(vector<double>& sub_array_1, int left, int mid, int right, int& count)
@@ -446,7 +437,6 @@ void mergeAscending(vector<double>& sub_array_1, int left, int mid, int right, i
 	}
 }
 
-
 // Precondition: sub_array_2[left..mid] and sub_array_2[mid+1..right] are sorted in descending order
 // Postcondition: Merges the two sorted sub-arrays into one
 void mergeDescending(vector<double>& sub_array_1, int left, int mid, int right, int& count)
@@ -487,7 +477,6 @@ void mergeDescending(vector<double>& sub_array_1, int left, int mid, int right, 
 		count++;
 	}
 }
-
 
 // Precondition: Array is not empty
 // Postcondition: Merge sorts the dynamic array in ascending order
@@ -572,7 +561,6 @@ void heapifyDescending(vector<double>& vector, int n, int i, int& count)
 	}
 }
 
-
 // Precondition: n is the size of the heap, i is an index in temp
 // Postcondition: Swapping node i to the correct location, with largest be the parent root
 void heapifyAscending(vector<double>& vector, int n, int i, int& count)
@@ -629,8 +617,6 @@ void heapSort_Descending(vector<double>& vector, int& count)
 		heapifyDescending(vector, i, 0, count);
 	}
 }
-
-
 
 // Precondition: Array is not empty
 // Postcondition: Asks user to either choose to heap sort the array in ascending or descending order
