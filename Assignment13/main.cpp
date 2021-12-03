@@ -32,7 +32,7 @@ int main(void)
         cout << "\t\t0> exit" << endl;
         cout << "\t" + string(100, char(205)) << endl;
 
-        int userInput = inputInteger("\t\tOption: ", 0, 3);
+        int userInput = inputInteger("\t\tOption: ", 0, 2);
         switch (userInput)
         {
         case 0: exit(1); break;
