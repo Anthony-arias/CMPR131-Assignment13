@@ -91,12 +91,11 @@ void displayRecords(vector<Student> studentList)
     for (int i = 0; i < studentList.size(); i++)
     {
         cout << "\t\t";
-        cout << right << studentList[i].getId();
+        cout.width(6); cout << right << studentList[i].getId();
         cout.width(25); cout << right << studentList[i].getFullName();
         cout.width(25); cout << right << studentList[i].getMajor();
         cout << "\t" << studentList[i].getGpa() << endl;
     }
-
 }
 
 //PreCondition: input Student vector
