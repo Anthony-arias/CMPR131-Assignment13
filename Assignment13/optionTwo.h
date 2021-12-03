@@ -23,6 +23,7 @@ void GpaInsertionSort(vector<Student>& studentList, bool ascending );
 //PostCondition: reads student records from file and inserts records in to vector
 void readFromFile(vector<Student>& studentList)
 {
+    studentList.clear();
     ifstream source;
     source.open("Students.dat");
     if (source.fail())
