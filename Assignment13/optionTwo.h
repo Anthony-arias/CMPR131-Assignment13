@@ -69,16 +69,19 @@ void writeToFile(vector<Student> studentList)
         cout << "\n\t\tERROR: No student records found.";
         return;
     }
-
-    ofstream myfile("Students.dat");
+    string fileName = "newList.dat";
+    ofstream myfile(fileName);
     if (myfile.is_open())
     {
-        for (int i = 0; i < studentList.size(); i++)
+        int size = studentList.size() - 1;
+        for (int i = 0; i < size; i++)
         {
             myfile << studentList[i].getId() << "," << studentList[i].getFullName()
                 << "," << studentList[i].getMajor() << "," << studentList[i].getGpa() << endl;
         }
-        cout << "\n\t\tData have been saved to students.dat.";
+        myfile << studentList[size].getId() << "," << studentList[size].getFullName()
+            << "," << studentList[size].getMajor() << "," << studentList[size].getGpa();
+        cout << "\n\t\tData have been saved to " << fileName << ".";
         myfile.close();
     }
     else cout << "\n\t\tERROR: Unable to open file.";
@@ -95,6 +98,12 @@ void displayRecords(vector<Student> studentList)
     }
 
     cout << "\n\t\tStudent records:" << endl;
+    cout << "\t\t";
+    cout.width(6); cout << right << "ID";
+    cout.width(25); cout << right << "Name";
+    cout.width(25); cout << right << "Major";
+    cout << "\t" << "GPA" << endl;
+    cout << "\t\t" << string(70, char(196)) << endl;
     for (int i = 0; i < studentList.size(); i++)
     {
         cout << "\t\t";
