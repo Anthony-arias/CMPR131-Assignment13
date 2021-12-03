@@ -1,5 +1,4 @@
 // main.cpp
-
 // Team: Anthony, An, Van, Vincent, Nhan
 // Chapter 12: 
 // 12/2/2021
@@ -88,7 +87,6 @@ void programOne(void)
 	} while (true);
 }
 
-
 //PreCondition: NA
 //PostCondition: runs program two
 void programTwo(void)
@@ -112,7 +110,6 @@ void programTwo(void)
 
         int option = inputChar("\t\tOption: ");
 
-
         switch (option)
         {
         case '0': return;
@@ -122,7 +119,7 @@ void programTwo(void)
         case 'D': removeRecord(studentList); break;
         case 'E': sortRecords(studentList); break;
         case 'F': writeToFile(studentList); break;
-        default: cout << "\t\tERROR-1A: Invalid input. Must be '0','A','B','C','D','E', or 'F'" << endl;
+        default: cout << "\t\tERROR-1A: Invalid input. Must be '0','A','B','C','D','E', or 'F'." << endl;
         }
         cout << endl;
         pause("\n\t\tPress enter to continue...");
