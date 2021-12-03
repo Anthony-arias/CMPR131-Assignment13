@@ -69,8 +69,8 @@ void writeToFile(vector<Student> studentList)
         cout << "\n\t\tERROR: No student records found.";
         return;
     }
-    string fileName = "newList.dat";
-    ofstream myfile(fileName);
+    
+    ofstream myfile("Students.dat");
     if (myfile.is_open())
     {
         int size = studentList.size() - 1;
