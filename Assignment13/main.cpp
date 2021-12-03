@@ -103,7 +103,7 @@ void programTwo(void)
         cout << "\t\tA> Read in data file" << endl;
         cout << "\t\tB> Display records" << endl;
         cout << "\t\tC> Insert a record" << endl;
-        cout << "\t\tD> remove a record" << endl;
+        cout << "\t\tD> Remove a record" << endl;
         cout << "\t\tE> Sort records by ID, name, major or GPA" << endl;
         cout << "\t\tF> Write out data file" << endl;
         cout << "\t" + string(100, char(196)) << endl;
