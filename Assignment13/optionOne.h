@@ -9,7 +9,6 @@
 
 using namespace std;
 
-
 // Precondition: None
 // Postcondition: Asks user to input the size and initializes the vector with size amount of random double
 void createArray(vector<double>& vector)
@@ -300,6 +299,7 @@ void performInsertionSort(vector<double> vector)
 	}
 
 }
+
 
 // Precondition: low and high are within the range of the array
 // Postcondition: Splits the array into a smaller partition, takes last element as pivot, places the pivot element at

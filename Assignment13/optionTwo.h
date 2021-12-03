@@ -1,5 +1,6 @@
 // optionTwo.h
 // Team: Anthony, An, Van, Vincent, Nhan
+
 #ifndef OPTION_TWO_LOCK
 #define OPTION_TWO_LOCK
 
@@ -42,10 +43,15 @@ void readFromFile(vector<Student>& studentList)
         while (stream.good()) {
             string substr;
             getline(stream, substr, ',');
-            if (counter == 1) newStudent.setId(stoi(substr));
-            else if (counter == 2) newStudent.setFullName(substr);
-            else if (counter == 3) newStudent.setMajor(substr);
-            else newStudent.setGpa(stof(substr));
+            if (counter == 1) 
+                newStudent.setId(stoi(substr));
+            else if (counter == 2) 
+                newStudent.setFullName(substr);
+            else if (counter == 3) 
+                newStudent.setMajor(substr);
+            else 
+                newStudent.setGpa(stof(substr));
+
             counter++;
         }
         studentList.push_back(newStudent);
@@ -59,7 +65,7 @@ void writeToFile(vector<Student> studentList)
 {
     if (studentList.empty())
     {
-        cout << "\n\t\tERROR: No student records found";
+        cout << "\n\t\tERROR: No student records found.";
         return;
     }
 
@@ -74,7 +80,7 @@ void writeToFile(vector<Student> studentList)
         cout << "\n\t\tData have been saved to students.dat.";
         myfile.close();
     }
-    else cout << "Unable to open file";
+    else cout << "\n\t\tERROR: Unable to open file.";
 }
 
 //PreCondition: input Student vector
@@ -83,7 +89,7 @@ void displayRecords(vector<Student> studentList)
 {
     if (studentList.empty())
     {
-        cout << "\n\t\tERROR: No student records found";
+        cout << "\n\t\tERROR: No student records found.";
         return;
     }
 
@@ -107,7 +113,7 @@ void insertRecord(vector<Student>& studentList)
     {
         if (studentList[i].getId() == _id)
         {
-            cout << "\n\t\tError: student already exists in student records";
+            cout << "\n\t\tError: Student already exists in student records.";
             return;
         }
     }
@@ -126,7 +132,7 @@ void removeRecord(vector<Student>& studentList)
 {
     if (studentList.empty())
     {
-        cout << "\n\t\tERROR: No student records found";
+        cout << "\n\t\tERROR: No student records found.";
         return;
     }
 
@@ -159,7 +165,7 @@ void sortRecords(vector<Student>& studentList)
 {
     if (studentList.empty())
     {
-        cout << "\n\t\tERROR: No student records found";
+        cout << "\n\t\tERROR: No student records found.";
         return;
     }
 
@@ -179,7 +185,7 @@ void sortRecords(vector<Student>& studentList)
                 case 'M': MajorInsertionSort(studentList, true); return;
                 case 'G': GpaInsertionSort(studentList, true); return;
                 default:
-                    cout << "\n\t\tERROR-1A: Invalid input. Must be 'I','N','M', or 'G'" << endl;
+                    cout << "\n\t\tERROR-1A: Invalid input. Must be 'I','N','M', or 'G'." << endl;
                 }
             }
             break;
@@ -196,14 +202,13 @@ void sortRecords(vector<Student>& studentList)
                 case 'M': MajorInsertionSort(studentList, false); return;
                 case 'G': GpaInsertionSort(studentList, false); return;
                 default:
-                    cout << "\n\t\tERROR-1A: Invalid input. Must be 'I','N','M', or 'G'" << endl;
+                    cout << "\n\t\tERROR-1A: Invalid input. Must be 'I','N','M', or 'G'." << endl;
                 }
             }
             break;
         }
-        else cout << "\n\t\tERROR-1A: Invalid input. Must be 'A', or 'D'" << endl;
-    }
-    
+        else cout << "\n\t\tERROR-1A: Invalid input. Must be 'A', or 'D'." << endl;
+    }    
 }
 
 //PreCondition: input Student vector
@@ -238,8 +243,7 @@ void IdInsertionSort(vector<Student>& studentList, bool ascending )
                 index--;
                 count++;
             }
-        }
-        
+        }        
 
         temp[index + 1] = key;
         count++;
@@ -288,8 +292,10 @@ void NameInsertionSort(vector<Student>& studentList, bool ascending )
         temp[index + 1] = key;
         count++;
     }
-    if (ascending) cout << "\n\t\tAscending order:" << endl;
-    else cout << "\n\t\tDescending order:" << endl;
+    if (ascending) 
+        cout << "\n\t\tAscending order:" << endl;
+    else 
+        cout << "\n\t\tDescending order:" << endl;
     displayRecords(temp);
     cout << "\n\t\tNumber of swapping routines = " << count;
 }
@@ -328,12 +334,13 @@ void MajorInsertionSort(vector<Student>& studentList, bool ascending )
             }
         }
 
-
         temp[index + 1] = key;
         count++;
     }
-    if (ascending) cout << "\n\t\tAscending order:" << endl;
-    else cout << "\n\t\tDescending order:" << endl;
+    if (ascending) 
+        cout << "\n\t\tAscending order:" << endl;
+    else 
+        cout << "\n\t\tDescending order:" << endl;
     displayRecords(temp);
     cout << "\n\t\tNumber of swapping routines = " << count;
 }
@@ -372,12 +379,13 @@ void GpaInsertionSort(vector<Student>& studentList, bool ascending )
             }
         }
 
-
         temp[index + 1] = key;
         count++;
     }
-    if (ascending) cout << "\n\t\tAscending order:" << endl;
-    else cout << "\n\t\tDescending order:" << endl;
+    if (ascending) 
+        cout << "\n\t\tAscending order:" << endl;
+    else 
+        cout << "\n\t\tDescending order:" << endl;
     displayRecords(temp);
     cout << "\n\t\tNumber of swapping routines = " << count;
 }
