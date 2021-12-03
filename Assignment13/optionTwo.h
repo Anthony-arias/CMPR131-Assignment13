@@ -70,7 +70,8 @@ void writeToFile(vector<Student> studentList)
         return;
     }
     
-    ofstream myfile("Students.dat");
+    string fileName = "Students.dat";
+    ofstream myfile(fileName);    
     if (myfile.is_open())
     {
         int size = studentList.size() - 1;
