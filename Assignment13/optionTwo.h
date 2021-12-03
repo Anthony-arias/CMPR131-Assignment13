@@ -119,15 +119,23 @@ void displayRecords(vector<Student> studentList)
 //PostCondition: insert student record in to vector
 void insertRecord(vector<Student>& studentList)
 {
-    int _id = inputInteger("\n\t\tEnter a new student ID: ", true);
-    for (int i = 0; i < studentList.size(); i++)
+    int _id = -1;
+    do
     {
-        if (studentList[i].getId() == _id)
+        bool dupe = false;
+        _id = inputInteger("\n\t\tEnter a new student ID: ", true);
+        for (int i = 0; i < studentList.size(); i++)
         {
-            cout << "\n\t\tError: Student already exists in student records.";
-            return;
+            if (studentList[i].getId() == _id)
+            {
+                cout << "\t\tError: Student already exists in student records.";
+                dupe = true;
+            }
+            if (dupe) break;
         }
-    }
+        if(!dupe) break;
+    } while (true);
+    
     string _name = inputString("\t\tEnter the student's name: ", true);
     string _major = inputString("\t\tEnter the student's major: ", true);
     float _gpa = inputDouble("\t\tEnter the student's GPA: ", 0, 4.0);
